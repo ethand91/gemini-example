@@ -1,10 +1,12 @@
 import google.generativeai as genai
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
-genai.configure(api_key="AIzaSyBq4iYpyZfMK3zKuvjgKKYbG0o0wCXGOfc")
+api_key = os.getenv('GOOGLE_GENAI_API_KEY')
+genai.configure(api_key=api_key)
 
 @app.route("/prompt", methods=["POST"])
 def prompt():
